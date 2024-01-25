@@ -1,0 +1,14 @@
+{
+  "name": "cadence_snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "cdc",
+        "path": "./snippets/cdc.json"
+      }
+    ]
+  }
+}

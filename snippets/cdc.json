@@ -1,0 +1,220 @@
+{
+  "single import": {
+    "prefix": "im",
+    "body": "import ${1:package} from \"../contracts/${1:package}.cdc\"",
+    "description": "Snippet for import statement"
+  },
+  "provider cap": {
+    "prefix": [
+      "provider",
+      "nftw"
+    ],
+    "body": "account.capabilities.storage.issue<auth(NonFungibleToken.Withdrawable) &{NonFungibleToken.Collection}>(${1:storagePath})",
+    "description": "Creating a withdrawable cap"
+  },
+  "init nft": {
+    "prefix": [
+      "initnft",
+      "nfti"
+    ],
+    "body": [
+      "let col= account.storage.borrow<&${1:contractName}.Collection>(from: ${1:contractName}.CollectionStoragePath)",
+      "if col == nil {",
+      "\taccount.storage.save( <- ${1:contractName}.createEmptyCollection(), to: ${1:contractName}.CollectionStoragePath)",
+      "\taccount.capabilities.unpublish(${1:contractName}.CollectionPublicPath)",
+      "\tlet cap = account.capabilities.storage.issue<&${1:contractName}.Collection>(${1:contractName}.CollectionStoragePath)",
+      "\taccount.capabilities.publish(cap, at: ${1:contractName}.CollectionPublicPath)",
+      "}"
+    ],
+    "description": "Init a nft collection"
+  },
+  "borrow": {
+    "prefix": [
+      "capborrow"
+    ],
+    "body": "account.capabilities.borrow<&${1:collectionType}>(${2:publicPath})!",
+    "description": "borrow a collection"
+  },
+  "withdraw nft collection": {
+    "prefix": [
+      "withdraw"
+    ],
+    "body": "account.storage.borrow<auth(NonFungibleToken.Withdrawable) &{NonFungibleToken.Collection}>(from: ${1:storagePath}) ?? panic(\"Cannot borrow reference to sender Collection from path \".concat(${1:storagePath}.toString()))",
+    "description": "borrow an nft collection to withdraw an item"
+  },
+  "struct 1 field": {
+    "prefix": [
+      "struct1",
+      "s1"
+    ],
+    "body": [
+      "access(all)",
+      "struct ${1:StructName} {",
+      "\taccess(all) let ${2:fieldName1}: ${3:fieldType1}",
+      "",
+      "\tinit(${2:fieldName1}: ${3:fieldType1}) {",
+      "\t\tself.${2:fieldName1}=${2:fieldName1}",
+      "\t}",
+      "",
+      "}"
+    ],
+    "description": "create a struct with 1 field"
+  },
+  "struct 2 field": {
+    "prefix": [
+      "struct2",
+      "s2"
+    ],
+    "body": [
+      "access(all)",
+      "struct ${1:StructName} {",
+      "\taccess(all) let ${2:fieldName1}: ${3:fieldType1}",
+      "\taccess(all) let ${4:fieldName2}: ${5:fieldType2}",
+      "",
+      "\tinit(${2:fieldName1}: ${3:fieldType1}, ${4:fieldName2}: ${5:fieldType2}) {",
+      "\t\tself.${2:fieldName1}=${2:fieldName1}",
+      "\t\tself.${4:fieldName2}=${4:fieldName2}",
+      "\t}",
+      "",
+      "}"
+    ],
+    "description": "create a struct with 2 field"
+  },
+  "struct 3 field": {
+    "prefix": [
+      "struct3",
+      "s3"
+    ],
+    "body": [
+      "access(all)",
+      "struct ${1:StructName} {",
+      "\taccess(all) let ${2:fieldName1}: ${3:fieldType1}",
+      "\taccess(all) let ${4:fieldName2}: ${5:fieldType2}",
+      "\taccess(all) let ${6:fieldName3}: ${7:fieldType3}",
+      "",
+      "\tinit(${2:fieldName1}: ${3:fieldType1}, ${4:fieldName2}: ${5:fieldType2},${6:fieldName3}: ${7:fieldType3}) {",
+      "\t\tself.${2:fieldName1}=${2:fieldName1}",
+      "\t\tself.${4:fieldName2}=${4:fieldName2}",
+      "\t\tself.${6:fieldName3}=${6:fieldName3}",
+      "\t}",
+      "",
+      "}"
+    ],
+    "description": "create a struct with 3 field"
+  },
+  "struct 4 field": {
+    "prefix": [
+      "struct4",
+      "s4"
+    ],
+    "body": [
+      "access(all)",
+      "struct ${1:StructName} {",
+      "\taccess(all) let ${2:fieldName1}: ${3:fieldType1}",
+      "\taccess(all) let ${4:fieldName2}: ${5:fieldType2}",
+      "\taccess(all) let ${6:fieldName3}: ${7:fieldType3}",
+      "\taccess(all) let ${8:fieldName4}: ${9:fieldType4}",
+      "",
+      "\tinit(${2:fieldName1}: ${3:fieldType1}, ${4:fieldName2}: ${5:fieldType2},${6:fieldName3}: ${7:fieldType3}, ${8:fieldName4}: ${9:fieldType4}) {",
+      "\t\tself.${2:fieldName1}=${2:fieldName1}",
+      "\t\tself.${4:fieldName2}=${4:fieldName2}",
+      "\t\tself.${6:fieldName3}=${6:fieldName3}",
+      "\t\tself.${8:fieldName4}=${8:fieldName4}",
+      "\t}",
+      "",
+      "}"
+    ],
+    "description": "create a struct with 4 field"
+  },
+  "struct 5 field": {
+    "prefix": [
+      "struct5",
+      "s5"
+    ],
+    "body": [
+      "access(all)",
+      "struct ${1:StructName} {",
+      "\taccess(all) let ${2:fieldName1}: ${3:fieldType1}",
+      "\taccess(all) let ${4:fieldName2}: ${5:fieldType2}",
+      "\taccess(all) let ${6:fieldName3}: ${7:fieldType3}",
+      "\taccess(all) let ${8:fieldName4}: ${9:fieldType4}",
+      "\taccess(all) let ${10:fieldName5}: ${11:fieldType5}",
+      "",
+      "\tinit(${2:fieldName1}: ${3:fieldType1}, ${4:fieldName2}: ${5:fieldType2},${6:fieldName3}: ${7:fieldType3}, ${8:fieldName4}: ${9:fieldType4},${10:fieldName5}: ${11:fieldType5})) {",
+      "\t\tself.${2:fieldName1}=${2:fieldName1}",
+      "\t\tself.${4:fieldName2}=${4:fieldName2}",
+      "\t\tself.${6:fieldName3}=${6:fieldName3}",
+      "\t\tself.${8:fieldName4}=${8:fieldName4}",
+      "\t\tself.${10:fieldName5}=${10:fieldName5}",
+      "\t}",
+      "",
+      "}"
+    ],
+    "description": "create a struct with 4 field"
+  },
+  "accees(all) fun": {
+    "prefix": [
+      "fa",
+      "funall"
+    ],
+    "body": [
+      "access(all)",
+      "fun ${1:functionName}(${2:arguments}) : ${3:return}{",
+      "\t${4:body}",
+      "}"
+    ],
+    "description": "create a pub function"
+  },
+  "accees(account) fun": {
+    "prefix": [
+      "fac",
+      "funacc"
+    ],
+    "body": [
+      "access(account)",
+      "fun ${1:functionName}(${2:arguments}) : ${3:return}{",
+      "\t${4:body}",
+      "}"
+    ],
+    "description": "create a account function"
+  },
+  "accees(contract) fun": {
+    "prefix": [
+      "fc",
+      "func"
+    ],
+    "body": [
+      "access(contract)",
+      "fun ${1:functionName}(${2:arguments}) : ${3:return}{",
+      "\t${4:body}",
+      "}"
+    ],
+    "description": "create a account function"
+  },
+  "accees(self) fun": {
+    "prefix": [
+      "fs",
+      "funs"
+    ],
+    "body": [
+      "access(self)",
+      "fun ${1:functionName}(${2:arguments}) : ${3:return}{",
+      "\t${4:body}",
+      "}"
+    ],
+    "description": "create a account function"
+  },
+  "fun": {
+    "prefix": [
+      "f",
+      "fun"
+    ],
+    "body": [
+      "access(${1:mode})",
+      "fun ${2:functionName}(${3:arguments}) : ${4:return}{",
+      "\t${5:body}",
+      "}"
+    ],
+    "description": "create a pub function"
+  }
+}
